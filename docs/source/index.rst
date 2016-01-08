@@ -2,6 +2,18 @@
 
 .. include:: ../../README.rst
 
+How it shows the time
+---------------------
+
+The time is calculated by adding the lit rectangles. 
+The top rectangle blinks changes every second. 
+In the next row, the each rectangle represents 5 hours.
+In the third row, every rectangle represents 1 hour.
+Together, these two rows show the hour of the day.
+The fourth row rectangles represents 5 minute intervals. 
+(Red rectangles show 15 minute intervals.)
+In the last row, every rectangle represents 1 minute.
+Like the hours, these two rows show the minutes after the hour.
 
 Example 14:28 (2:28 pm)
 =======================
