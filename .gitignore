@@ -68,7 +68,7 @@ dist
 # Test files #
 ##############
 test.py
-main.py
+#main.py
 
 # Distribution / packaging #
 ############################
