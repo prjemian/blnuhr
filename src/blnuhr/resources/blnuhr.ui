@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QLabel" name="l_s">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 170, 127);
+color: rgb(255, 170, 127);</string>
+         </property>
+         <property name="text">
+          <string>--------</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="l_h5_1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 85, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_h5_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 85, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_h5_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(128, 42, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_h5_4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(128, 42, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="l_h1_1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 85, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_h1_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 85, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_h1_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(128, 42, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_h1_4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(128, 42, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QLabel" name="l_m5_1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 170, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 170, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 85, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 170, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_5">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_6">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(128, 42, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_7">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_8">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_9">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(128, 42, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_10">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m5_11">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="l_m1_1">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 170, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m1_2">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 170, 127);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m1_3">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="l_m1_4">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(130, 85, 64);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
