@@ -17,8 +17,10 @@ import resources
 
 
 CLOCK_UI_FILE = 'blnuhr.ui'
-ORANGE = {0:'background-color: rgb(130, 85, 64);\ncolor: rgb(130, 85, 64);',
-          1:'background-color: rgb(255, 170, 127);\ncolor: rgb(255, 170, 127);',
+ORANGE = {0:'''background-color: rgb(130, 85, 64);
+               color: rgb(130, 85, 64);''',
+          1:'''background-color: rgb(255, 170, 127);
+               color: rgb(255, 170, 127);''',
          }
 RED = {0:'background-color: rgb(128, 42, 64);',
        1:'background-color: rgb(255, 85, 127);',
@@ -27,7 +29,7 @@ REFRESH_TIME__MS = 100
 
 
 class Clock_blnuhr(QtGui.QWidget):
-    '''create a GUI for the clock and start it running'''
+    '''create a widget for the clock and start it running'''
 
     def __init__(self, parent=None):
         QtGui.QWidget.__init__(self)
@@ -49,52 +51,56 @@ class Clock_blnuhr(QtGui.QWidget):
         
         Show the time as a string on the seconds LED as a tool tip
         '''
+        def set_LIGHT(w, color, choice):
+            w.setStyleSheet(str(color[choice]))
+
         t = t or datetime.datetime.now()
         
         # seconds blinker
-        self.l_s.setStyleSheet(str(ORANGE[t.second % 2]))
+        set_LIGHT(self.l_s, ORANGE, t.second % 2)
         self.l_s.setToolTip(str(t))
 
         # 5-hour markers
         if self.last_t is None or self.last_t.hour != t.hour: 
-            self.l_h5_1.setStyleSheet(str(RED[t.hour > 4]))
-            self.l_h5_2.setStyleSheet(str(RED[t.hour > 9]))
-            self.l_h5_3.setStyleSheet(str(RED[t.hour > 14]))
-            self.l_h5_4.setStyleSheet(str(RED[t.hour > 19]))
+            set_LIGHT(self.l_h5_1, RED, t.hour > 4)
+            set_LIGHT(self.l_h5_2, RED, t.hour > 9)
+            set_LIGHT(self.l_h5_3, RED, t.hour > 14)
+            set_LIGHT(self.l_h5_4, RED, t.hour > 19)
 
             # 1-hour markers
             h = t.hour % 5
-            self.l_h1_1.setStyleSheet(str(RED[h > 0]))
-            self.l_h1_2.setStyleSheet(str(RED[h > 1]))
-            self.l_h1_3.setStyleSheet(str(RED[h > 2]))
-            self.l_h1_4.setStyleSheet(str(RED[h > 3]))
+            set_LIGHT(self.l_h1_1, RED, h > 0)
+            set_LIGHT(self.l_h1_2, RED, h > 1)
+            set_LIGHT(self.l_h1_3, RED, h > 2)
+            set_LIGHT(self.l_h1_4, RED, h > 3)
         
         # 5-minute markers
         if self.last_t is None or self.last_t.minute != t.minute: 
-            self.l_m5_1.setStyleSheet(str(ORANGE[t.minute > 4]))
-            self.l_m5_2.setStyleSheet(str(ORANGE[t.minute > 9]))
-            self.l_m5_3.setStyleSheet(str(RED[t.minute > 14]))
-            self.l_m5_4.setStyleSheet(str(ORANGE[t.minute > 19]))
-            self.l_m5_5.setStyleSheet(str(ORANGE[t.minute > 24]))
-            self.l_m5_6.setStyleSheet(str(RED[t.minute > 29]))
-            self.l_m5_7.setStyleSheet(str(ORANGE[t.minute > 34]))
-            self.l_m5_8.setStyleSheet(str(ORANGE[t.minute > 39]))
-            self.l_m5_9.setStyleSheet(str(RED[t.minute > 44]))
-            self.l_m5_10.setStyleSheet(str(ORANGE[t.minute > 49]))
-            self.l_m5_11.setStyleSheet(str(ORANGE[t.minute > 54]))
+            set_LIGHT(self.l_m5_1,  ORANGE, t.minute > 4)
+            set_LIGHT(self.l_m5_2,  ORANGE, t.minute > 9)
+            set_LIGHT(self.l_m5_3,  RED,    t.minute > 14)
+            set_LIGHT(self.l_m5_4,  ORANGE, t.minute > 19)
+            set_LIGHT(self.l_m5_5,  ORANGE, t.minute > 24)
+            set_LIGHT(self.l_m5_6,  RED,    t.minute > 29)
+            set_LIGHT(self.l_m5_7,  ORANGE, t.minute > 34)
+            set_LIGHT(self.l_m5_8,  ORANGE, t.minute > 39)
+            set_LIGHT(self.l_m5_9,  RED,    t.minute > 44)
+            set_LIGHT(self.l_m5_10, ORANGE, t.minute > 49)
+            set_LIGHT(self.l_m5_11, ORANGE, t.minute > 54)
     
             # 1-minute markers
             m = t.minute % 5
-            self.l_m1_1.setStyleSheet(str(ORANGE[m > 0]))
-            self.l_m1_2.setStyleSheet(str(ORANGE[m > 1]))
-            self.l_m1_3.setStyleSheet(str(ORANGE[m > 2]))
-            self.l_m1_4.setStyleSheet(str(ORANGE[m > 3]))
+            set_LIGHT(self.l_m1_1, ORANGE, m > 0)
+            set_LIGHT(self.l_m1_2, ORANGE, m > 1)
+            set_LIGHT(self.l_m1_3, ORANGE, m > 2)
+            set_LIGHT(self.l_m1_4, ORANGE, m > 3)
         
         # for next time
         self.last_t = t
 
 
 def main ():
+    '''entry point to run standalone'''
     app = QtGui.QApplication(sys.argv)
     clock = Clock_blnuhr()
     clock.show()
