@@ -33,7 +33,7 @@ setup (name             = blnuhr.__package_name__,        # blnuhr
        platforms        = 'any',
        package_dir      = {'': 'src'},
        #packages         = find_packages(),
-       packages         = [blnuhr.__package_name__, ],
+       packages         = [str(blnuhr.__package_name__), ],
        package_data     = dict(blnuhr=['resources/*', ]),
        classifiers      = blnuhr.__classifiers__,
 #        entry_points={

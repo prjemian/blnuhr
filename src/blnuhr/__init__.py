@@ -6,7 +6,7 @@ __package_name__        = u'blnuhr'
 __description__         = u"Python & Qt rendition of Berlin's quantity didactics clock"
 __long_description__    = __description__
 
-__version__             = u'0.1'
+__version__             = u'0.1.4'
 __release__             = __version__
 __author__              = u'Pete R. Jemian'
 __email__               = u'prjemian@gmail.com'
@@ -20,7 +20,7 @@ __license__             = u'OPEN SOURCE LICENSE'
 __url__                 = u'https://github.com/prjemian/blnuhr/'
 __download_url__        = __url__
 __keywords__            = ['Python', 'Qt4', 'clock']
-__requires__            = ['PyQt4>=4',      # this project developed with PyQt4 >= 4.11.3
+__requires__            = [#'PyQt4>=4',      # this project developed with PyQt4 >= 4.11.3
                           ]
 
 __classifiers__ = [
