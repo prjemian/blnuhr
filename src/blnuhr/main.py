@@ -10,6 +10,7 @@ import sys
 from PyQt4 import QtGui, QtCore
 import form_support
 
+
 CLOCK_FORM = 'blnuhr.ui'
 ORANGE = {0:'background-color: rgb(130, 85, 64);\ncolor: rgb(130, 85, 64);',
           1:'background-color: rgb(255, 170, 127);\ncolor: rgb(255, 170, 127);',

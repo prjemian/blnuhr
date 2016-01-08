@@ -16,6 +16,14 @@ Source code documentation for *blnuhr*.
     :undoc-members:
     :show-inheritance:
 
+:mod:`form_support` Module
+--------------------------
+
+.. automodule:: blnuhr.form_support
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Indices and tables
 ==================
