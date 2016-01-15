@@ -1,5 +1,5 @@
 
-# Copyright (c) 2009 - 2015, UChicago Argonne, LLC.
+# Copyright (c) 2009 - 2016, Pete Jemian.
 # See LICENSE file for details.
 
 '''

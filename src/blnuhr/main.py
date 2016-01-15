@@ -1,13 +1,9 @@
-'''
-Created on Jan 8, 2016
-
-@author: Pete
-'''
+# Copyright (c) 2009 - 2016, Pete Jemian.
+# See LICENSE file for details.
 
 import datetime
 import os
 import sys
-import time
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     from mock_PyQt4 import QtCore, QtGui
