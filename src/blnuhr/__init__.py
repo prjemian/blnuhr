@@ -6,7 +6,7 @@ __package_name__        = u'blnuhr'
 __description__         = u"Python & Qt rendition of Berlin's quantity didactics clock"
 __long_description__    = __description__
 
-__version__             = u'0.1.6'
+__version__             = u'0.1.7'
 __release__             = __version__
 __author__              = u'Pete R. Jemian'
 __email__               = u'prjemian@gmail.com'
