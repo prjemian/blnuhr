@@ -8,6 +8,7 @@ from setuptools import setup, find_packages
 import os
 import re
 import sys
+import versioneer
 
 # pull in some definitions from the package's __init__.py file
 sys.path.insert(0, os.path.join('src', ))
@@ -21,8 +22,9 @@ long_description = open('README.rst', 'r').read()
 
 setup (
     name             = blnuhr.__package_name__,        # blnuhr
-    version          = blnuhr.__version__,
     license          = blnuhr.__license__,
+    version          = versioneer.get_version(),
+    cmdclass         = versioneer.get_cmdclass(),
     description      = blnuhr.__description__,
     long_description = long_description,
     author           = blnuhr.__author_name__,
@@ -35,7 +37,7 @@ setup (
     package_dir      = {'': 'src'},
     #packages         = find_packages(),
     packages         = [str(blnuhr.__package_name__), ],
-    package_data     = dict(blnuhr=['resources/*', ]),
+    package_data     = dict(blnuhr=['resources/*', 'LICENSE', ]),
     classifiers      = blnuhr.__classifiers__,
     entry_points={
        # create & install console_scripts in <python>/bin
