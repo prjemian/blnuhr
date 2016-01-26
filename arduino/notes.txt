@@ -1,0 +1,61 @@
+===============================
+Berlin Clock - hardware project
+===============================
+
+Basic display (R: red, O: orange)::
+
+                  [O]
+   [--R--]  [--R--] [--R--]  [--R--]
+   [--R--]  [--R--] [--R--]  [--R--]
+   [O][O][R][O][O][R][O][O][R][O][O]
+   [--O--]  [--O--] [--O--]  [--O--]
+
+* Need controls to set the current time.
+  - could be just two buttons: mode & select
+* and indication when the current time is not set.
+* "Blinking 12:00" is the right metaphor.
+
+Possible Implementations
+========================
+
+# LCD circuit
+  - larger than touch screen
+  - more expensive to produce custom circuit board
+  - more labor to produce custom circuit board
+  - design is closer to original implementation
+  - I/O points require Arduino Mega (mega1280 or mega2560)
+
+# Touch screen
+  - faster to implement
+  - compact design, easy to produce
+  - smaller than LCD circuit
+  - can use Arduino Uno
+  - TFT screen graphics are primitive, needs more code
+    + draw each graphic object using basic commands
+	+ "clear" object by drawing background to that area
+  - TFT touch interface is primitive
+  - easier interface to set the time:
+    + button to enter/exit mode to set the time
+	+ touch the lights for the time configuration
+	+ double-touch to clear the row
+
+Seeedstudio TFT Touch Screen
+============================
+
+:main support page for v1.0 board:
+  http://www.seeedstudio.com/wiki/TFT_Touch_Shield_V1.0
+
+other support
+
+* http://www.seeedstudio.com/wiki/TFT_Touch_Shield
+* http://www.seeedstudio.com/depot/28-tft-touch-shield-p-864.html
+* http://forum.arduino.cc/index.php?topic=117611.0
+
+* display screen is 320x240
+* need to map out the display
+* 5 rows plus borders: 4 px wide, 40 px high colors
+* 8 px border on left and right
+* large rectangles: 40x73, 2 px border
+* small rectangles: 40x24, 2 px border
+* use "*" character to indicate "mode" button
+* calibrate time to the minute by clicking the "seconds" blinker
