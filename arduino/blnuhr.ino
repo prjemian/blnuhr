@@ -18,18 +18,28 @@
   #define XP 57   // can be a digital pin, this is A3 
 #endif 
 
+#define BUFFER_LENGTH          40
+#define COMMAND_LENGTH         16
+#define EOS_TERMINATOR_CHAR    '\n'
+#define GRAPHICS_HEIGHT        36
+#define LEFT_BORDER            8
+#define LOOP_DELAY_MS          50
+#define UNDEFINED              -1
+
 unsigned int ORANGE = RED + GREEN*7/10;
-#define GRAPHICS_HEIGHT 36
-#define LEFT_BORDER     8
-#define LOOP_DELAY_MS   50
+char inputString[BUFFER_LENGTH+1];
+char strPtr;
+boolean stringComplete;
+long arg1;
+long arg2;
+char baseCmd[COMMAND_LENGTH+1];
 
 static unsigned int TS_MINX, TS_MAXX, TS_MINY, TS_MAXY;
  
 //Touch Screen Co-ordinate mapping register
 static unsigned int MapX1, MapX2, MapY1, MapY2;
 
-// TODO: need a way to calibrate time_reference_ms to a known time
-unsigned long time_reference_ms;
+unsigned long time_reference_ms;  // calibrateTime(h, m) to set to h:m
 int minutes = -1;
 
 TouchScreen ts = TouchScreen(17, A2, A1, 14, 300); 
@@ -37,8 +47,10 @@ TouchScreen ts = TouchScreen(17, A2, A1, 14, 300);
 void setup()
 {
   int i;
+  resetBuffer();
   Tft.init();  //init TFT library
   Serial.begin(115200);
+  Serial.println(F("blnuhr started"));
 
   // guide lines
   //for (i = 0; i < 220; i += 48)
@@ -55,11 +67,13 @@ void loop()
   unsigned long t;
   Point p;
   p = getTouch();
+  readBuffer();
+  processCmd();
   t = millis() - time_reference_ms;
-  m = t/1000/60;
+  m = (t/1000/60) % (60*24);
   if (m != minutes) {
     minutes = m;
-    displayTime(m / 60, minutes);
+    displayTime(m / 60, minutes % 60);
     Serial.println(t);
   }
   draw_1s((t / 500) % 2);
@@ -90,14 +104,21 @@ Point getTouch() {
 
 void displayTime(int hours, int minutes) {
   int i;
-  for (i = 0; i < 4; i++)
-    draw_5h(i, hours >= (i+1)*5);
-  for (i = 0; i < 4; i++)
-    draw_1h(i, (hours % 5) > i);
-  for (i = 0; i < 11; i++)
-    draw_5m(i, minutes >= (i+1)*5);
-  for (i = 0; i < 4; i++)
-    draw_1m(i, (minutes % 5) > i);
+  if (hours < 24 && minutes < 60) {
+    for (i = 0; i < 4; i++)
+      draw_5h(i, hours >= (i+1)*5);
+    for (i = 0; i < 4; i++)
+      draw_1h(i, (hours % 5) > i);
+    for (i = 0; i < 11; i++)
+      draw_5m(i, minutes >= (i+1)*5);
+    for (i = 0; i < 4; i++)
+      draw_1m(i, (minutes % 5) > i);
+  } else {
+    Serial.print("Incorrect time specified: ");
+    Serial.print(hours);
+    Serial.print(":");
+    Serial.println(minutes);
+  }
 }
 
 void startup_animation() {
@@ -189,5 +210,76 @@ void draw_1s(int state) {
   unsigned int color = state ? ORANGE : GRAY1;
   int row = 24;
   Tft.fillCircle(row, MAX_Y/2, GRAPHICS_HEIGHT/2, color);
+}
+
+
+void readBuffer() {
+  while (Serial.available()) {
+    if (strPtr == BUFFER_LENGTH) {
+      Serial.println(F("ERROR_BUFFER_OVERFLOW"));
+      resetBuffer();    // discard the buffer contents
+    } else {
+      char inChar = (char)Serial.read();
+      if (inChar == EOS_TERMINATOR_CHAR) {
+        stringComplete = true;
+        break;
+      }
+      inputString[strPtr++] = inChar;
+      inputString[strPtr] = 0;
+    }
+  }
+}
+
+void resetBuffer() {
+  inputString[0] = 0;    // discard the buffer contents
+  strPtr = 0;
+  stringComplete = false;
+  baseCmd[0] = 0;
+  arg1 = UNDEFINED;
+  arg2 = UNDEFINED;
+}
+
+void processCmd() {
+  if (stringComplete) {
+    executeCommand();    // process the command
+    resetBuffer();       // clear for the next command
+  }
+}
+
+void executeCommand() {
+  // parse the inputString into "h m" integers
+  char *cmd;
+  char buf[BUFFER_LENGTH+1];
+  long _h, _m;
+  bool success = false;
+  
+  strcpy(buf, inputString);  // copy locally so we don't modify source
+  cmd = strtok(buf, " ");
+  if (cmd) {
+    _h = atoi(cmd) % 24;
+    cmd = strtok(NULL, " ");
+    if (cmd) {
+      _m = atoi(cmd) % 60;
+      cmd = strtok(NULL, " ");
+      if (!cmd)
+        success = true;
+    }
+  }
+  if (success) {
+    calibrateTime(int(_h), int(_m));
+  } else {
+    Serial.print(F("set the time by sending two integers: \"h m\\n\""));
+  }
+  resetBuffer();
+}
+
+void calibrateTime(int h, int m) {
+  unsigned long _h=h, _m=m;
+  Serial.print("calibrateTime(");
+  Serial.print(h);
+  Serial.print(", ");
+  Serial.print(m);
+  Serial.println(")");
+  time_reference_ms = millis() - (_h*60 + _m)*60*1000;
 }
 
