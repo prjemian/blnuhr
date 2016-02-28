@@ -59,3 +59,40 @@ other support
 * small rectangles: 40x24, 2 px border
 * use "*" character to indicate "mode" button
 * calibrate time to the minute by clicking the "seconds" blinker
+
+
+ezLCD 3.5" Touchscreen with Arduino Uno R3
+==========================================
+
+https://earthlcd.com/products/educational-maker/arlcd/
+https://github.com/earthmake/arLCD
+http://www.mcmelectronics.com/product/83-15516?scode=DD1621&trk_msg=K8SM3TQT26GKJ42ODNPTHJT1PG&trk_contact=64H3CG1IQAOJBCELHDHA484HF4&utm_source=Listrak&utm_medium=Email&utm_term=83-15516&utm_campaign=DD1621_v2&utm_content=DD1621_v2
+$39.99 (sale price: 2016-02-01) -- ONE DAY SALE - now out of stock
+
+RaspberryPi with Touch Screen
+=============================
+
+Raspberry Pi
+------------
+
+RASPBERRY-PI  RASPBERRYPI-2-MODB-1GB.  SBC, RASPBERRY PI 2, MODEL B, 1GB
+
+* http://www.newark.com/raspberry-pi/raspberrypi-2-modb-1gb/sbc-raspberry-pi-2-model-b-1gb/dp/38Y6467
+* $35.00
+
+
+Touch Screen
+------------
+
+RASPBERRY-PI  RASPBERRYPI-DISPLAY  Raspberry Pi 7" Touch Screen Display with 10 Finger Capacitive Touch 
+
+* http://www.newark.com/raspberry-pi/raspberrypi-display/display-7-touch-screen-rpi-sbc/dp/49Y1712?ost=Raspberry+Pi+7"+Touch+Screen+Display
+* 60.00
+
+Enclosure
+---------
+
+MULTICOMP  CBRPP-TS-BLK/WHT  RASPBERRY PI TOUCHSCREEN ENCLOSURE 
+* http://www.newark.com/multicomp/cbrpp-ts-blk-wht/raspberry-pi-touchscreen-enclosure/dp/55Y8475
+DS
+* $45.74
