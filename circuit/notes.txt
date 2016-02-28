@@ -1,0 +1,23 @@
+panel mounts for 5mm LED
+
+VCC (VISUAL COMMUNICATIONS COMPANY)  RNG 268  LED MOUNTING RING
+http://www.newark.com/vcc-visual-communications-company/rng-268/led-mounting-ring/dp/23K2393?MER=PPSO_N_P_EverywhereElse_None
+
+VCC (VISUAL COMMUNICATIONS COMPANY)  CLB300CTP  LED Lens, Clip-On, Transparent, 7.11 mm, Round, PC (Polycarbonate) 
+http://www.newark.com/vcc-visual-communications-company/clb300ctp/led-lenses/dp/57P6494
+
+
+
+Needs a real-time clock
+DS3231 AT24C32 IIC High Precision Real Time Clock 
+http://www.newegg.com/Product/Product.aspx?Item=9SIA6RP3719822&cm_re=DS3231-_-9SIA6RP3719822-_-Product
+http://www.newegg.com/Product/Product.aspx?Item=9SIA67038W0691&cm_re=DS3231-_-9SIA67038W0691-_-Product
+
+see these app notes
+http://www.l8ter.com/?p=417
+http://kevinrye.net/files/reading_the_temp_ds3231_and_ds18b20.php
+http://cdn.sparkfun.com/datasheets/BreakoutBoards/DS3234_Example_Code.pde
+
+
+header strips
+http://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=header+strip&N=-1&isNodeId=1&Page=4
