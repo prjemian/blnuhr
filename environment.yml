@@ -1,0 +1,9 @@
+name: blnuhr
+dependencies:
+  - python=2.7.*
+  - pyqt=4.*
+  - sphinx
+  - pip:
+    - versioneer
+    - sphinx_rtd_theme
+    

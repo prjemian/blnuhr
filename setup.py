@@ -14,9 +14,6 @@ import versioneer
 sys.path.insert(0, os.path.join('src', ))
 import blnuhr
 
-requires = blnuhr.__requires__
-packages = find_packages()
-verbose=1
 long_description = open('README.rst', 'r').read()
 
 
@@ -32,7 +29,7 @@ setup (
     url              = blnuhr.__url__,
     download_url     = blnuhr.__download_url__,
     keywords         = blnuhr.__keywords__,
-    install_requires = requires,
+    install_requires = blnuhr.__requires__,
     platforms        = 'any',
     package_dir      = {'': 'src'},
     #packages         = find_packages(),
