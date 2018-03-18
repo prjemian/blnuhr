@@ -87,6 +87,27 @@ class Clock_blnuhr(QtGui.QWidget):
             set_LIGHT(self.l_m1_3, ORANGE, m > 2)
             set_LIGHT(self.l_m1_4, ORANGE, m > 3)
         
+        # 5-second markers
+        if self.last_t is None or self.last_t.second != t.second: 
+            set_LIGHT(self.l_s5_1,  ORANGE, t.second > 4)
+            set_LIGHT(self.l_s5_2,  ORANGE, t.second > 9)
+            set_LIGHT(self.l_s5_3,  RED,    t.second > 14)
+            set_LIGHT(self.l_s5_4,  ORANGE, t.second > 19)
+            set_LIGHT(self.l_s5_5,  ORANGE, t.second > 24)
+            set_LIGHT(self.l_s5_6,  RED,    t.second > 29)
+            set_LIGHT(self.l_s5_7,  ORANGE, t.second > 34)
+            set_LIGHT(self.l_s5_8,  ORANGE, t.second > 39)
+            set_LIGHT(self.l_s5_9,  RED,    t.second > 44)
+            set_LIGHT(self.l_s5_10, ORANGE, t.second > 49)
+            set_LIGHT(self.l_s5_11, ORANGE, t.second > 54)
+    
+            # 1-second markers
+            s = t.second % 5
+            set_LIGHT(self.l_s1_1, ORANGE, s > 0)
+            set_LIGHT(self.l_s1_2, ORANGE, s > 1)
+            set_LIGHT(self.l_s1_3, ORANGE, s > 2)
+            set_LIGHT(self.l_s1_4, ORANGE, s > 3)
+        
         # for next time
         self.last_t = t
 
