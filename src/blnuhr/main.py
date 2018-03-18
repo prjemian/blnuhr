@@ -23,7 +23,7 @@ REFRESH_TIME__MS = 100
 class Clock_blnuhr(QtGui.QWidget):
     '''create a widget for the clock and start it running'''
 
-    def __init__(self, parent=None):
+    def __init__(self, **_kwargs):
         QtGui.QWidget.__init__(self)
         resources.loadUi(CLOCK_UI_FILE, self)
         self.last_t = None
