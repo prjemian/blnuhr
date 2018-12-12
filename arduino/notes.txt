@@ -39,6 +39,24 @@ Possible Implementations
 	+ touch the lights for the time configuration
 	+ double-touch to clear the row
 
+Arduino Real Time Clock Using DS3231 
+====================================
+
+Exactly what we want:
+https://www.instructables.com/id/Real-time-clock-using-DS3231-EASY/
+
+but the real code is here:
+http://www.rinkydinkelectronics.com/library.php?id=73
+
+
+https://github.com/Makuna/Rtc/wiki/RtcDS3231-object
+
+
+Lunch Happened Bento Lunchbox
+www.itzyritzy.com
+no longer produced
+search for "bento lunch boxes" for a wide range of possibilities
+
 Seeedstudio TFT Touch Screen
 ============================
 
