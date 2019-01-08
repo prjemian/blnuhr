@@ -30,14 +30,9 @@
 #define TOUCH_ORIENTATION  LANDSCAPE
 
 
-// Assign human-readable names to some common 16-bit color values:
-#define BLACK   0x0000
-#define RED     0xF800
-#define WHITE   0xFFFF
+// Assign colors we'll use:
 #define RED_OFF     0x8148
-#define ORANGE      0xfbe4
 #define ORANGE_OFF  0x82A8
-// #define BACKGROUND  0xaaaa
 uint16_t background;
 
 #ifndef min
@@ -53,13 +48,10 @@ long micros_offset = 0;
 RtcDS3231<TwoWire> Rtc(Wire);
 int first_flag = 1;
 
-//const int XP=6,XM=A2,YP=A1,YM=7; //ID=0x9341
-//const int TS_LEFT=907,TS_RT=136,TS_TOP=942,TS_BOT=139;
-const int XP=6, XM=56, YP=55, YM=7; //ID=0x9341
-const int TS_LEFT=907, TS_RT=136, TS_TOP=942, TS_BOT=139;
+const int XP=6,XM=A2,YP=A1,YM=7; //ID=0x9341
+const int TS_LEFT=907,TS_RT=136,TS_TOP=942,TS_BOT=139;
 
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
-TSPoint tp;
 
 #define MINPRESSURE 200
 #define MAXPRESSURE 1000
@@ -67,6 +59,8 @@ TSPoint tp;
 
 void setup() {
   uint32_t time_0 = millis(), time_startup;
+  uint32_t time_00 = time_0;
+
   Serial.begin(COMM_SPEED);
   if (!Serial) delay(5000);           //allow some time for startup
   time_startup = millis() - time_0;
@@ -90,7 +84,7 @@ void setup() {
   display_height = tft.height() - BORDER*2;
   row_height = (display_height - BORDER*4)/5;
   background = tft.color565(30, 30, 30);
-  tft.fillRect(0, 0, tft.width(), tft.height(), BLACK);
+  tft.fillRect(0, 0, tft.width(), tft.height(), TFT_BLACK);
   tft.fillRect(BORDER/2, BORDER/2, display_width+BORDER, display_height+BORDER, background);
   
   time_0 = millis();
@@ -98,6 +92,8 @@ void setup() {
   time_startup = millis() - time_0;
   Serial.println("RealTimeClock took " + String(time_startup) + "ms to start");
   setup_RTC(Rtc);
+  
+  Serial.println("setup() took " + String(millis()-time_00) + "ms to complete");
 }
 
 
@@ -124,7 +120,7 @@ void drawSeconds(int visible) {
   radius = row_height/2;
   v = BORDER + radius;
   h = tft.width()/2;
-  color = (visible) ? ORANGE : ORANGE_OFF;
+  color = (visible) ? TFT_ORANGE : ORANGE_OFF;
   tft.fillCircle(h, v, radius, color);
 }
 
@@ -143,13 +139,14 @@ void drawMinute(int m) {
 
 void drawH15(int hr) {
   uint16_t top, left, h, v, radius, color;
+  hr = (hr == 0) ? 24 : hr;     // show all lights on, for nightowls
   radius = BORDER/4;
   v = row_height;
   top = BORDER + 1*(v + BORDER);
   left = BORDER;
   h = (display_width - BORDER*3)/4;
   for (int t = 5; t<25; t+=5) {
-    color = (hr > t) ? RED : RED_OFF;
+    color = (hr >= t) ? TFT_RED : RED_OFF;
     tft.fillRoundRect(left, top, h, v, radius, color);
     left += BORDER + h;
   }
@@ -158,13 +155,14 @@ void drawH15(int hr) {
 
 void drawH1(int hr) {
   uint16_t top, left, h, v, radius, color;
+  hr = (hr == 0) ? 24 : hr;     // show all lights on, for nightowls
   radius = BORDER/4;
   v = row_height;
   top = BORDER + 2*(v + BORDER);
   left = BORDER;
   h = (display_width - BORDER*3)/4;
   for (int t = 0; t<5; t++) {
-    color = ((hr % 5) > t) ? RED : RED_OFF;
+    color = ((hr % 5) > t) ? TFT_RED : RED_OFF;
     tft.fillRoundRect(left, top, h, v, radius, color);
     left += BORDER + h;
   }
@@ -179,7 +177,7 @@ void drawM15(int m) {
   left = BORDER;
   h = (display_width - BORDER*10)/11;
   for (int t = 5; t<59; t+=5) {
-    color_on  = ((t%15) == 0) ? RED : ORANGE;
+    color_on  = ((t%15) == 0) ? TFT_RED : TFT_ORANGE;
     color_off = ((t%15) == 0) ? RED_OFF : ORANGE_OFF;
     color = (m >= t) ? color_on : color_off;
     tft.fillRoundRect(left, top, h, v, radius, color);
@@ -196,7 +194,7 @@ void drawM1(int m) {
   left = BORDER;
   h = (display_width - BORDER*3)/4;
   for (int t = 0; t<5; t++) {
-    color = ((m % 5) > t) ? ORANGE : ORANGE_OFF;
+    color = ((m % 5) > t) ? TFT_ORANGE : ORANGE_OFF;
     tft.fillRoundRect(left, top, h, v, radius, color);
     left += BORDER + h;
   }
@@ -204,6 +202,7 @@ void drawM1(int m) {
 
 
 void loop() {
+  TSPoint tp;
   // FIXME: tp = ts.getPoint();   //tp.x, tp.y are ADC values
   //if (tp.z > MINPRESSURE && tp.z < MAXPRESSURE) {
   //  Serial.println("tp: x=" + String(tp.x) + " y=" + String(tp.y) + " z=" + String(tp.z));
@@ -229,9 +228,10 @@ void loop() {
       // Serial.print(temp.AsFloatDegC());
       // Serial.println("C");
 
+      tft.fillRect(BORDER, BORDER, (display_width-row_height)/2, row_height+BORDER/2, background);
       tft.setCursor(BORDER, BORDER+row_height);
       tft.setFont(&FreeSmallFont);
-      tft.setTextColor(BLACK, background);
+      tft.setTextColor(TFT_BLACK, background);
       tft.setTextSize(2);
       tft.print(String(temp.AsFloatDegC()) + "C");
 
