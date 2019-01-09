@@ -70,8 +70,8 @@ void setup() {
   Serial.println("Serial took " + String(time_startup) + "ms to start");
 
   uint16_t ID = tft.readID();
-  Serial.print("TouchScreen TFT ID = 0x");
-  Serial.println(ID, HEX);
+  //  Serial.print("TouchScreen TFT ID = 0x");
+  //  Serial.println(ID, HEX);
   if (ID == 0xD3D3) ID = 0x9481; // write-only shield
   time_0 = millis();
   tft.begin(ID);
@@ -84,6 +84,8 @@ void setup() {
   display_height = tft.height() - BORDER*2;
   row_height = (display_height - BORDER*4)/5;
   background = tft.color565(30, 30, 30);
+  Serial.print("background = 0x");
+  Serial.println(background, HEX);
   tft.fillRect(0, 0, tft.width(), tft.height(), TFT_BLACK);
   tft.fillRect(BORDER/2, BORDER/2, display_width+BORDER, display_height+BORDER, background);
   
