@@ -1,7 +1,7 @@
 name: blnuhr
 dependencies:
-  - python=2.7.*
-  - pyqt=4.*
+  - python=3.*
+  - pyqt=5.*
   - sphinx
   - pip:
     - versioneer

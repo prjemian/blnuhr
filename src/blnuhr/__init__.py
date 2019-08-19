@@ -1,5 +1,5 @@
 
-from main import *
+from .main import *
 
 
 __package_name__        = u'blnuhr'
@@ -12,14 +12,13 @@ __institution__         = u"Late-Nite(tm) Software"
 __author_name__         = __author__
 __author_email__        = __email__
 
-__copyright__           = u'2016, Pete R. Jemian'
+__copyright__           = u'2016-2019, Pete R. Jemian'
 # __license_url__         = u''
 __license__             = u'OPEN SOURCE LICENSE'
 __url__                 = u'https://github.com/prjemian/blnuhr/'
 __download_url__        = __url__
-__keywords__            = ['Python', 'Qt4', 'clock']
-__requires__            = [#'PyQt4>=4',      # this project developed with PyQt4 >= 4.11.3
-                          ]
+__keywords__            = ['Python', 'Qt5', 'clock']
+__requires__            = []
 
 __classifiers__ = [
             'Development Status :: 4 - Beta',

@@ -1,5 +1,5 @@
 
-# Copyright (c) 2009 - 2016, Pete Jemian.
+# Copyright (c) 2009 - 2019, Pete Jemian.
 # See LICENSE file for details.
 
 '''
@@ -10,7 +10,7 @@
 import inspect
 import os
 #from PyQt4 import QtCore, QtGui, uic
-from PyQt4 import uic
+from PyQt5 import uic
 
 
 FORMS_SUBDIRECTORY = 'resources'

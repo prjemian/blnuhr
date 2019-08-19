@@ -236,8 +236,8 @@ latex_elements = {
 latex_documents = [
   (master_doc, 
    blnuhr.__package_name__ + '.tex', 
-   unicode(blnuhr.__package_name__ + ' Documentation'),
-   unicode(blnuhr.__author_name__), 
+   blnuhr.__package_name__ + ' Documentation',
+   blnuhr.__author_name__, 
    'manual'),
 ]
 
@@ -269,7 +269,7 @@ latex_documents = [
 man_pages = [
     (master_doc, 
      blnuhr.__package_name__, 
-     unicode(blnuhr.__package_name__ + u' Documentation'),
+     blnuhr.__package_name__ + u' Documentation',
      [author], 1)
 ]
 
@@ -285,7 +285,7 @@ man_pages = [
 texinfo_documents = [
   (master_doc, 
     blnuhr.__package_name__, 
-    unicode(blnuhr.__package_name__ + u' Documentation'),
+    blnuhr.__package_name__ + u' Documentation',
     author, 
     blnuhr.__package_name__, 
     blnuhr.__description__,

@@ -1,11 +1,10 @@
-# Copyright (c) 2009 - 2018, Pete Jemian.
+# Copyright (c) 2009 - 2019, Pete Jemian.
 # See LICENSE file for details.
 
 import datetime
-import os
 import sys
-from PyQt4 import QtCore, QtGui
-import resources
+from PyQt5 import QtCore, QtWidgets
+from . import resources
 
 
 CLOCK_UI_FILE = 'blnuhr.ui'
@@ -20,11 +19,11 @@ RED = {0:'background-color: rgb(128, 42, 64);',
 REFRESH_TIME__MS = 100
 
 
-class Clock_blnuhr(QtGui.QWidget):
+class Clock_blnuhr(QtWidgets.QWidget):
     '''create a widget for the clock and start it running'''
 
     def __init__(self, **_kwargs):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         resources.loadUi(CLOCK_UI_FILE, self)
         self.last_t = None
         self.update(None)
@@ -32,9 +31,7 @@ class Clock_blnuhr(QtGui.QWidget):
     def start(self):
         '''begin the periodic update of the clock'''
         self.timer = QtCore.QTimer(self)
-        QtCore.QObject.connect(self.timer, 
-                               QtCore.SIGNAL('timeout()'), 
-                               self.update)
+        self.timer.timeout.connect(self.update)
         self.timer.start(REFRESH_TIME__MS)
     
     def update(self, t=None):
@@ -49,7 +46,7 @@ class Clock_blnuhr(QtGui.QWidget):
         t = t or datetime.datetime.now()
         
         # seconds blinker
-        set_LIGHT(self.l_s, ORANGE, t.microsecond / 500000)
+        set_LIGHT(self.l_s, ORANGE, int(t.microsecond / 500000))
         self.l_s.setToolTip(str(t))
         color_scheme = {0: ORANGE, 1: ORANGE, 2: RED}
 
@@ -101,9 +98,9 @@ class Clock_blnuhr(QtGui.QWidget):
         self.last_t = t
 
 
-def main ():
+def kopf():
     '''entry point to run standalone'''
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     clock = Clock_blnuhr()
     clock.show()
     clock.start()
@@ -111,4 +108,4 @@ def main ():
 
 
 if __name__ == '__main__':
-    main()
+    kopf()
