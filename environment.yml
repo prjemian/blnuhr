@@ -1,4 +1,8 @@
 name: blnuhr
+
+channels:
+  - defaults
+
 dependencies:
   - python=3.*
   - pyqt=5.*
