@@ -38,6 +38,5 @@ __credits__ += u'\nemail: ' + __email__
 __credits__ += u'\ninstitution: ' + __institution__
 __credits__ += u'\nURL: ' + __url__
 
-from ._version import get_versions
-__version__ = get_versions()['version']
-del get_versions
+from importlib.metadata import version
+__version__ = version("blnuhr")

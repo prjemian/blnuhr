@@ -106,3 +106,7 @@ coverage.xml
 #.pydevproject
 *.sublime-project
 *.sublime-workspace
+
+# APS #
+#######
+.loglogin

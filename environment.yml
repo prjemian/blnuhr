@@ -1,13 +1,14 @@
 name: blnuhr
 
 channels:
-  - defaults
+  - nodefaults
 
 dependencies:
   - python=3.*
   - pyqt=5.*
   - sphinx
+  - myst-parser
+  - setuptools-scm
+  - pip
   - pip:
-    - versioneer
-    - sphinx_rtd_theme
-    
+      - sphinx_rtd_theme
