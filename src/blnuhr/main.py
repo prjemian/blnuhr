@@ -1,4 +1,4 @@
-# Copyright (c) 2009 - 2019, Pete Jemian.
+# Copyright (c) 2009 - 2026, Pete Jemian.
 # See LICENSE file for details.
 
 import datetime
