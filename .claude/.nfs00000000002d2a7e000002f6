@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(pip install:*)",
-      "Bash(ls -la /home/beams1/JEMIAN/Documents/projects/prjemian/blnuhr/ | grep -E \"^\\\\.\" | grep -v \"^\\\\.\\\\.$\")",
-      "Bash(git -C /home/beams1/JEMIAN/Documents/projects/prjemian/blnuhr log --oneline -20)"
-    ]
-  }
-}
