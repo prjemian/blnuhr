@@ -27,15 +27,17 @@ TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 Adafruit_GFX_Button ok_btn, cancel_btn, h10up_btn, h1up_btn, m10up_btn, m1up_btn;
 
 // touch screen input
-float touch_pressure = 0;
-const float touch_smooth = 0.96;  // between 0 and 1
-bool pressed_last = false;
 int pixel_x, pixel_y;     //Touch_getXY() updates global vars
+enum TouchState { TOUCH_IDLE, TOUCH_HOLDING, TOUCH_WAIT_RELEASE };
+TouchState touch_state = TOUCH_IDLE;
+TSPoint touch_point;
+bool touch_just_pressed = false;
+bool touch_long_pressed = false;
+uint32_t touch_start_time = 0;
 
 // support mode to SET time
 bool set_mode = false;
 uint32_t set_mode_start_time = NULL;
-uint32_t press_waiting_start_time = NULL;
 
 
 void setup() {
@@ -69,9 +71,9 @@ void loop() {
 void do_operate_mode() {
   
   // watch for user to choose mode to SET the time
-  uint32_t  elapsed = longPressForSetMode();
-  if (LONG_PRESS_MIN_MS <= elapsed && elapsed < LONG_PRESS_TIMEOUT_MS) {
-    Serial.println("Initiating SET mode after longPress=" + String(elapsed) + " ms");
+  updateTouchState();
+  if (touch_long_pressed) {
+    Serial.println("Initiating SET mode after long press");
     set_mode = true;
     init_set_mode();
   }
@@ -134,9 +136,9 @@ void do_set_mode() {
   if (set_mode_start_time == NULL)
     set_mode_start_time = millis();
     
-  TSPoint p = getTouchPoint();
-  bool pressed = touch_pressure > MINPRESSURE && p.z > MINPRESSURE;
-  if (pressed) {
+  updateTouchState();
+  if (touch_just_pressed) {
+    TSPoint p = touch_point;
     // Serial.println("touched ...");
     if (DISPLAY_ROTATION == PORTRAIT) {
       pixel_x = map(p.x, TS_LEFT, TS_RT, 0, tft.width());
@@ -200,8 +202,8 @@ void do_set_mode() {
 
 /*
  * buttonIsPressed(point)
- * 
- * is the pressure in range to indicate point is pressed?
+ *
+ * is the raw pressure in range to indicate point is pressed?
  */
 bool buttonIsPressed(TSPoint p) {
   return(p.z > MINPRESSURE && p.z < MAXPRESSURE);
@@ -209,11 +211,42 @@ bool buttonIsPressed(TSPoint p) {
 
 
 /*
+ * updateTouchState()
+ *
+ * Read the touchscreen once and turn it into press and long-press events.
+ * A long press is reported once, then further input is ignored until release.
+ */
+void updateTouchState() {
+  touch_point = getTouchPoint();
+  bool pressed = buttonIsPressed(touch_point);
+  touch_just_pressed = false;
+  touch_long_pressed = false;
+
+  if (touch_state == TOUCH_IDLE) {
+    if (pressed) {
+      touch_state = TOUCH_HOLDING;
+      touch_start_time = millis();
+      touch_just_pressed = true;
+    }
+  } else if (touch_state == TOUCH_HOLDING) {
+    if (!pressed) {
+      touch_state = TOUCH_IDLE;
+    } else if (millis() - touch_start_time >= LONG_PRESS_MIN_MS) {
+      touch_state = TOUCH_WAIT_RELEASE;
+      touch_long_pressed = true;
+    }
+  } else if (touch_state == TOUCH_WAIT_RELEASE) {
+    if (!pressed) {
+      touch_state = TOUCH_IDLE;
+    }
+  }
+}
+
+
+/*
  * getTouchPoint()
- * 
+ *
  * return a TSPoint object with the current TouchScreen event
- * 
- * also compute smooth ``touch_pressure`` value that debounces the unstable raw value
  */
 TSPoint getTouchPoint() {
   TSPoint p = ts.getPoint();
@@ -224,59 +257,6 @@ TSPoint getTouchPoint() {
   digitalWrite(YP, HIGH);
   digitalWrite(XM, HIGH);
 
-  //  if (p.z > 0) {
-  //    Serial.print("getTouchPoint():");
-  //    Serial.print(" x:" + String(p.x));
-  //    Serial.print(" y:" + String(p.y));
-  //    Serial.print(" z:" + String(p.z));
-  //    Serial.println();
-  //  }
-
-  // global variables: touch_pressure, touch_smooth
-  touch_pressure = touch_smooth*touch_pressure + p.z*(1-touch_smooth);   // debouncing
-  
   return(p);
-}
-
-/*
- * longPressForSetMode()
- * 
- * User will press and hold touch screen to initiate time SET mode
- * keep holding   : press of less than LONG_PRESS_MIN_MS (~2s)
- * enter SET mode : press between LONG_PRESS_MIN_MS and LONG_PRESS_TIMEOUT_MS
- * show time      : press >= LONG_PRESS_TIMEOUT_MS (~10s)
- */
-uint32_t longPressForSetMode() {
-  uint32_t  elapsed = 0;
-  TSPoint pt_now = getTouchPoint();
-  bool pressed = touch_pressure > MINPRESSURE;
-
-  if (pressed) {
-    if (pressed != pressed_last) {
-      press_waiting_start_time = millis();
-      tft.fillRect(20, 20, 20, 20, TFT_YELLOW);
-    } else {
-      elapsed = millis() - press_waiting_start_time;
-      // Serial.println("waiting ...  duration:" + String(elapsed) + " ms");
-      if (LONG_PRESS_MIN_MS <= elapsed && elapsed < LONG_PRESS_TIMEOUT_MS) {
-        tft.fillRect(20, 20, 20, 20, TFT_GREEN);
-      }
-      if (elapsed >= LONG_PRESS_TIMEOUT_MS) {
-        tft.fillRect(20, 20, 20, 20, TFT_RED);
-      }
-    }
-    elapsed = 0;  // still waiting, return value is zero now
-
-  } else {  // !pressed
-    if (pressed != pressed_last) {
-      elapsed = millis() - press_waiting_start_time;
-      // Serial.println("Just released.  duration:" + String(elapsed) + " ms");
-      press_waiting_start_time = NULL;
-      tft.fillRect(20, 20, 20, 20, BACKGROUND);
-    }
-  }
-
-  pressed_last = pressed;
-  return(elapsed);
 }
 
