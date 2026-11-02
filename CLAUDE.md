@@ -1,6 +1,6 @@
 # CLAUDE.md — blnuhr
 
-Python & Qt5 rendition of the [Berlin Quantity Didactics Clock](http://www.surveyor.in-berlin.de/berlin/uhr/indexe.html).
+Python & Qt6 rendition of the [Berlin Quantity Didactics Clock](http://www.surveyor.in-berlin.de/berlin/uhr/indexe.html).
 
 - **Docs**: http://blnuhr.readthedocs.org
 - **Repo**: https://github.com/prjemian/blnuhr/
@@ -32,7 +32,7 @@ pip install -e .
 ## Run
 
 ```bash
-blnuhr          # GUI entry point (requires PyQt5 display)
+blnuhr          # GUI entry point (requires PyQt6 display)
 ```
 
 ## Packaging
