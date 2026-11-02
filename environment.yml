@@ -4,8 +4,8 @@ channels:
   - nodefaults
 
 dependencies:
-  - python=3.*
-  - pyqt=5.*
+  - python=3.11
+  - pyqt=6.*
   - sphinx
   - myst-parser
   - setuptools-scm

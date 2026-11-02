@@ -3,7 +3,7 @@
 
 import datetime
 import sys
-from PyQt5 import QtCore, QtWidgets
+from PyQt6 import QtCore, QtWidgets
 from . import resources
 
 
@@ -104,7 +104,7 @@ def kopf():
     clock = Clock_blnuhr()
     clock.show()
     clock.start()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 
 if __name__ == '__main__':

@@ -9,8 +9,7 @@
 
 import inspect
 import os
-#from PyQt4 import QtCore, QtGui, uic
-from PyQt5 import uic
+from PyQt6 import uic
 
 
 FORMS_SUBDIRECTORY = 'resources'
@@ -57,7 +56,7 @@ def loadUi(ui_file, baseinstance=None, **kw):
         app = QtGui.QApplication(sys.argv)
         win = TextWindow('the title', __doc__)
         win.show()
-        sys.exit(app.exec_())
+        sys.exit(app.exec())
 
     '''
     return uic.loadUi(resource_file(ui_file), baseinstance=baseinstance, **kw)
