@@ -135,7 +135,7 @@ void do_set_mode() {
     set_mode_start_time = millis();
     
   TSPoint p = getTouchPoint();
-  bool pressed = touch_pressure > MINPRESSURE && p.z > MINPRESSURE;
+  bool pressed = buttonIsPressed(p);
   if (pressed) {
     // Serial.println("touched ...");
     if (DISPLAY_ROTATION == PORTRAIT) {
@@ -203,8 +203,8 @@ void do_set_mode() {
  * 
  * is the pressure in range to indicate point is pressed?
  */
-bool buttonIsPressed(TSPoint p) {
-  return(p.z > MINPRESSURE && p.z < MAXPRESSURE);
+bool buttonIsPressed(TSPoint /* p */) {
+  return(touch_pressure > MINPRESSURE && touch_pressure < MAXPRESSURE);
 }
 
 
